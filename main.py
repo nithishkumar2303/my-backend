@@ -7,6 +7,7 @@ from torchvision import transforms, models
 from PIL import Image
 import io
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -98,7 +99,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Enhanced model loading with better error handling
 try:
-    model_path = "C:\eye\eye_\model\meibomian_model_20250721_170031.pth"
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(BASE_DIR, "model", "meibomian_model_latest.pth")
     
     logger.info(f"Loading model from: {model_path}")
     checkpoint = torch.load(model_path, map_location=device)
